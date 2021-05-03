@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderSQL">
+	<!--주문정보 추가 -->
+	<insert id="setOrderInfo" parameterType="order">
+		insert into TBL_ORDER(orderCode
+							  ,orderDate
+							  ,userId
+							  ,userName
+							  ,thumbImg
+							  ,productCode
+							  ,productName
+							  ,discountPrice
+							  ,purchaseQty
+							  ,totalPrice
+							  ,paymentType
+							  ,totalPayment) values(
+							  0
+							  ,now()
+							  ,#{userId}
+							  ,#{userName}
+							  ,#{thumbImg}
+							  ,#{productCode}
+							  ,#{productName}
+							  ,#{discountPrice}
+							  ,#{purchaseQty}
+							  ,#{totalPrice}
+							  ,#{paymentType}
+							  ,#{totalPayment})
+    </insert>
+	
+	<!--개인 주문정보 가져오기 -->
+	<select id="getOrderInfo" parameterType="String" resultType="order">
+		select * from TBL_ORDER where userId = #{userId} and orderstate = 1
+	</select>
+	
+	<!-- 재고처리 옵션없음 -->
+	<update id="reduceSaleProduct" parameterType="java.util.Map">
+		update TBL_PRODUCT set stockQty = stockQty - #{purchaseQty}
+							, saleQty = saleQty + #{purchaseQty}
+		where productCode = #{productCode}
+	</update>
+	
+	
+	<!--주문정보 가져오기 -->
+	<select id="getOrderProduct" resultType="order">
+		select * from TBL_ORDER order by ordercode desc 
+	</select>
+</mapper>

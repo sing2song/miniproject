@@ -1,0 +1,17 @@
+package com.saltlux.mysite.dto;
+
+import org.springframework.stereotype.Component;
+import lombok.Data;
+
+@Component
+@Data
+public class CartDTO {
+	private int cartCode;//카트번호
+	private String userId; 
+	private String userEmail;
+	private int productCode;
+	private String productName;
+	private String thumbImg;
+	private int discountPrice; 
+	private int productQty; //장바구니에 담은 상품수량
+}
