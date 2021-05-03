@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <table width=1000 height=100% cellpadding=0 cellspacing=0 border=0>
-
+<tr>
   <!-- 우측 실행 화면 (두번째 td태그) -->
   <td valign=top width=100% height=100% class=outline_side>
    <div class="indiv" style="margin:0 10px 0 30px;"> <!-- start indiv -->
@@ -19,16 +19,6 @@
       	탈퇴안내
       </h5>
      </div>
-     <table width="100%" cellpadding="0" cellspacing="0" border="0">
-      <tr class="box_con" style="font-size:13px; line-height:22px; font-weight:normal; color:#666;">
-       <td>
-        	불편하셨던 점이나 불만사항을 알려주시면 적극 반영하도록 하겠습니다.<br/>
-        	회원 탈퇴시의 아래 사항을 숙지하시기 바랍니다.<br/>
-        	- 회원 탈퇴 시 고객님의 정보는 상품 반품 및 A/S를 위해 전자상거래 등에서의 소비자 보호에 관한 법률에 의거한 고객정보 보호정책에 따라 관리 됩니다.<br/>
-        	- 탈퇴 시 고객님께서 보유하셨던 적립금은 삭제 됩니다.
-       </td>
-      </tr>
-     </table>
      
      <!-- 탈퇴하기(비밀번호 입력) -->
      <div style="margin:50px 0 10px 0">
