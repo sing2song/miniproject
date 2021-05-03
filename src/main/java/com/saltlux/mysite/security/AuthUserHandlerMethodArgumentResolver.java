@@ -11,7 +11,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolverComposite;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.saltlux.mysite.dto.UserVo;
+import com.saltlux.mysite.dto.UserDTO;
 
 public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -44,7 +44,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		}
 		
 		// 파라미터 타입이 UserVo가 아니면...
-		if(!parameter.getParameterType().equals(UserVo.class)) {
+		if(!parameter.getParameterType().equals(UserDTO.class)) {
 			return false;
 		}
 		

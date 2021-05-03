@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.saltlux.mysite.dto.UserDTO;
-import com.saltlux.mysite.dto.UserVo;
 import com.saltlux.mysite.service.UserService;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {

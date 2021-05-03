@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.saltlux.mysite.dto.UserVo;
+import com.saltlux.mysite.dto.UserDTO;
 
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {

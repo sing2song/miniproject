@@ -46,6 +46,7 @@ public class OrderController {
 	public String setUserInfo(@ModelAttribute UserDTO userDTO) {
 		System.out.println("배송정보="+userDTO);
 		userService.updateUserInfo(userDTO);
+		System.out.println("업데이트내용"+userService.checkId("song"));
 		return "success";
 	}
 	
@@ -115,7 +116,7 @@ public class OrderController {
 		String userId = (String) session.getAttribute("memId");
 		ModelAndView mav = new ModelAndView();
 		//주문정보
-		List<OrderDTO> list = orderService.getOrderInfo(userId);		
+		List<OrderDTO> list = orderService.getOrderProduct(userId);		
 		//유저정보
 		UserDTO userDTO = userService.checkId(userId);
 		
@@ -136,8 +137,13 @@ public class OrderController {
 	public String insertOrderlist(@RequestParam Map<String, Object> map, HttpSession session) {
 		//ORDERLIST 생성
 		System.out.println("map :" + map);
-		//int su = orderService.insertOrderlist(map);
+		orderService.insertOrderlist(map);
 		
+		//orderstate증가 0=>1(주문접수상태)
+		int orderCode = orderService.getOrderListCode();
+		map.put("orderCode", orderCode);
+		String userId = (String)map.get("userId");
+		orderService.OrderReady(map);
 		return "success";		
 		
 	}
@@ -154,6 +160,15 @@ public class OrderController {
 		orderService.reduceSaleProduct(map);
 		
 		return "success";
+	}
+	
+	@RequestMapping(value="/orderCancel", method=RequestMethod.GET)
+	@ResponseBody
+	public String orderCancel(HttpSession session) {
+		String memId = (String)session.getAttribute("memId");
+		orderService.orderCancel(memId);
+		
+		return "/miniproject";
 	}
 	
 }

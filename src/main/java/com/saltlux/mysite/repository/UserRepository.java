@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.saltlux.mysite.dto.UserDTO;
-import com.saltlux.mysite.dto.UserVo;
 import com.saltlux.mysite.exception.UserRepositoryException;
 
 @Repository
@@ -21,24 +20,7 @@ public class UserRepository {
 	@Autowired
 	private DataSource dataSource;	
 	
-	public UserVo findByNo(Long no) {
-		return sqlSession.selectOne("user.find",no);
-	}
-
-	public UserDTO getUser(Map<String, String> map) throws UserRepositoryException {
-		return sqlSession.selectOne("user.getUser",map);
-	}
 	
-	public boolean update(UserVo vo){
-		int count = sqlSession.update("user.update",vo);	
-		return count==1;
-	}
-
-
-	public UserVo findByEmail(String email) {
-		return sqlSession.selectOne("user.findByEmail", email);
-	}
-
 
 	public UserDTO checkId(String userId) {
 		return sqlSession.selectOne("user.checkId",userId);
@@ -76,6 +58,11 @@ public class UserRepository {
 
 	public void memberDelete(Map<String, String> map) {
 		sqlSession.delete("user.memberDelete",map);
+	}
+
+
+	public UserDTO getUser(Map<String, String> map) {
+		return sqlSession.selectOne("user.getUser",map);
 	}
 
 

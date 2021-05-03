@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.saltlux.mysite.dto.GoodsDTO;
 import com.saltlux.mysite.dto.OrderDTO;
+import com.saltlux.mysite.dto.OrderlistDTO;
 
 @Repository
 public class OrderRepository {
@@ -24,8 +25,8 @@ public class OrderRepository {
 		return sqlSession.insert("orderSQL.setOrderInfo", orderDTO);
 	}
 
-	public List<OrderDTO> getOrderInfo(String userId) {
-		return sqlSession.selectList("orderSQL.getOrderInfo",userId);
+	public List<OrderlistDTO> getOrderListInfo(String userId) {
+		return sqlSession.selectList("orderSQL.getOrderListInfo",userId);
 	}
 
 	public void reduceSaleProduct(Map<String, Object> map) {
@@ -36,8 +37,28 @@ public class OrderRepository {
 		sqlSession.delete("orderSQL.orderCancel",userId);
 	}
 
-	public List<OrderDTO> getOrderProduct() {
-		return sqlSession.selectList("orderSQL.getOrderProduct");
+	public List<OrderDTO> getOrderProduct(String userId) {
+		return sqlSession.selectList("orderSQL.getOrderProduct",userId);
+	}
+
+	public int insertOrderlist(Map<String, Object> map) {
+		return sqlSession.insert("orderSQL.insertOrderlist",map);
+	}
+
+	public List<OrderlistDTO> getOrderListAllInfo() {
+		return sqlSession.selectList("orderSQL.getOrderListAllInfo");
+	}
+
+	public void OrderReady(Map<String, Object> map) {
+		sqlSession.update("orderSQL.OrderReady",map);
+	}
+
+	public int getOrderListCode() {
+		return sqlSession.selectOne("orderSQL.getOrderListCode");
+	}
+
+	public List<OrderDTO> getOrder(String orderCode) {
+		return sqlSession.selectList("orderSQL.getOrder",orderCode);
 	}	
 
 }

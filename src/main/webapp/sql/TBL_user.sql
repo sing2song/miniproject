@@ -16,11 +16,11 @@ CREATE TABLE TBL_user (
 	,userphone VARCHAR(30) NULL -- userphone,
 	,userpoint INT DEFAULT '0' -- userpoint,
 	,productincart INT DEFAULT '0' -- productincart,
-	,recievername VARCHAR(30) NULL -- recievername,
-	,recieverzipcode VARCHAR(20) NULL -- recieverzipcode,
-	,recieveraddr1 VARCHAR(500) NULL -- recieveraddr1,
-	,recieveraddr2 VARCHAR(500) NULL -- recieveraddr2,
-	,recieverphone VARCHAR(30) NULL -- recieverphone,
+	,receiverName VARCHAR(30) NULL -- recievername,
+	,receiverzipcode VARCHAR(20) NULL -- recieverzipcode,
+	,receiveraddr1 VARCHAR(500) NULL -- recieveraddr1,
+	,receiveraddr2 VARCHAR(500) NULL -- recieveraddr2,
+	,receiverphone VARCHAR(30) NULL -- recieverphone,
     ,deliveryMsg VARCHAR(500) NULL
 	,deliveryoption VARCHAR(20) DEFAULT '기본배송' -- deliveryoption,
 	,joindate DATE -- joindate,
@@ -36,4 +36,9 @@ ALTER TABLE TBL_user
     
     
 select * from TBL_user;
-alter table TBL_user drop userpoint;
+
+alter table TBL_user change recieverName receiverName VARCHAR(30);
+alter table TBL_user change recieverzipcode receiverzipcode VARCHAR(20);
+alter table TBL_user change recieveraddr1 receiveraddr1 VARCHAR(500);
+alter table TBL_user change recieveraddr2 receiveraddr2 VARCHAR(500);
+alter table TBL_user change recieverphone receiverphone VARCHAR(30);

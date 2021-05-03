@@ -8,8 +8,8 @@ ALTER TABLE TBL_ORDER
 DROP TABLE IF EXISTS TBL_ORDER;
 
 create table TBL_ORDER(
-			orderCode int auto_increment primary key
-			,ordreDate Date
+			orderCode int 
+			,orderDate Date
 			,userId  varchar(35)
 			,userName varchar(30)
 			,thumbImg varchar(50)
@@ -40,7 +40,7 @@ ALTER TABLE TBL_ORDERLIST
 DROP TABLE IF EXISTS TBL_ORDERLIST;
 
 create table TBL_ORDERLIST(
-			orderCode int primary key
+			orderCode int primary key auto_increment
 			,orderDate Date
 			,userId varchar(35)
 			,userName varchar(30)
@@ -52,7 +52,6 @@ create table TBL_ORDERLIST(
 			,orderState int 			-- 주문상태
 			);
             
- 
+
  select * from TBL_ORDER;
  select * from TBL_ORDERLIST;
- 

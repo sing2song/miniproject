@@ -9,6 +9,7 @@
 		<typeAlias type="com.saltlux.mysite.dto.QnaboardDTO" alias="qnaboard"/>
 		<typeAlias type="com.saltlux.mysite.dto.CartDTO" alias="cart"/>
 		<typeAlias type="com.saltlux.mysite.dto.OrderDTO" alias="order"/>
+		<typeAlias type="com.saltlux.mysite.dto.OrderlistDTO" alias="orderlist"/>
 		<typeAlias type="com.saltlux.mysite.dto.AdminDTO" alias="admin"/>
     </typeAliases>	
 	<mappers>

@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.saltlux.mysite.dto.AdminDTO;
 import com.saltlux.mysite.dto.GoodsDTO;
 import com.saltlux.mysite.dto.OrderDTO;
+import com.saltlux.mysite.dto.OrderlistDTO;
 import com.saltlux.mysite.security.Auth;
 import com.saltlux.mysite.service.AdminService;
 import com.saltlux.mysite.service.GoodsService;
@@ -85,20 +86,6 @@ public class AdminController {
 		session.invalidate();
 		return new ModelAndView("redirect:/admin/loginForm");
 	}
-
-	
-	//관리자 주문관리
-	@RequestMapping(value="/orderList",method=RequestMethod.GET)
-	public ModelAndView orderList(){
-		ModelAndView mav = new ModelAndView();
-		List<OrderDTO> list = orderService.getOrderProduct(); 
-		System.out.println("admin의 주문관리리스트="+list);
-		mav.addObject("list", list);	
-		mav.addObject("display","/admin/order/orderList.jsp");
-		mav.setViewName("/admin/index");
-		return mav;
-	}
-	
 	
 	//상품등록폼
 	@RequestMapping(value="/productRegistForm",method=RequestMethod.GET)

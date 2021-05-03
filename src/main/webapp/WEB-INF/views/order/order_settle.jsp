@@ -22,6 +22,7 @@
 		<c:set var="total" value="0" />
 		<c:forEach var="orderDTO" items="${list }" varStatus="status">	
 			<tr>
+				<c:set var="total" value="${total + orderDTO.discountPrice * orderDTO.purchaseQty }" />
 				<td style="vertical-align:top; padding: 30px 0;">
 					<a href="#" style="margin-bottom:0;">
 					<img src="${pageContext.request.contextPath }/assets/image/thumb/${orderDTO.thumbImg }" style="width: 70px;"></a>
@@ -29,13 +30,13 @@
 				<td class="order_option" style="text-align:left;vertical-align:top; ">
 					<div style="color: #222; height:auto; font-weight: 700; font-size: 14px; padding: 30px 0; margin:20px 0 20px 0;">${orderDTO.productName }</div>
 				</td>
-				<td style="color: #222; vertical-align:middle; padding: 30px 50px 30px 0; text-align:right;">${orderDTO.tdiscountPrice }<span>원</span></td>
+				<td style="color: #222; vertical-align:middle; padding: 30px 50px 30px 0; text-align:right;">${orderDTO.discountPrice }<span>원</span></td>
 				<td style="vertical-align: middle; padding: 22px 0 30px 0;">
 					<div style="padding-top: 8px; vertical-align: middle; color:#222;">${orderDTO.purchaseQty }<span>개</span></div>
 				</td>
 				<td class="totalPrice" tyle="vertical-align: middle; color:#333; text-align:right; padding: 30px 20px 0 0; font-weight:700; ">
-				<f:formatNumber pattern="###,###,###" value="${cartDTO.discountPrice * cartDTO.productQty }" /><span>원</span></td>
-				<c:set var="total" value="${total + cartDTO.discountPrice * cartDTO.productQty }" />
+				<f:formatNumber pattern="###,###,###" value="${orderDTO.discountPrice * orderDTO.purchaseQty }" /><span>원</span></td>
+				
 			</tr>
 			</c:forEach>		
 		</tbody>
@@ -111,22 +112,22 @@
 			          <tbody>
 				          <tr>
 				            <td class="box_sub_tit" style="width:150px; height:38px; font-size: 13px; color: #666; padding-top: 5px;">받는 분 이름:</td>
-				            <td id="receiverName" class="box_sub_tit" style="font-size: 13px; color: #666;"></td>
+				            <td id="receiverName" class="box_sub_tit" style="font-size: 13px; color: #666;">${userDTO.receiverName }</td>
 				          </tr>
 				          
 				           <tr>
 				             <td class="box_sub_tit" style="font-size: 13px; color: #666;">핸드폰번호 :</td>
-				            <td id="receiverPhone" class="box_sub_tit" style="font-size: 13px; color: #666;"></td>
+				            <td id="receiverPhone" class="box_sub_tit" style="font-size: 13px; color: #666;">${userDTO.receiverPhone }</td>
 				          </tr>
 				          
 				          <tr>
 				             <td class="box_sub_tit" style="font-size: 13px; color: #666;">우편번호 :</td>
-				            <td id="receiverZipcode" class="box_sub_tit" style="font-size: 13px; color: #666;"></td>
+				            <td id="receiverZipcode" class="box_sub_tit" style="font-size: 13px; color: #666;">${userDTO.receiverZipcode }</td>
 				            
 				          </tr>
 				          <tr>
 				            <td class="box_sub_tit" style="font-size: 13px; color: #666;">주소 : </td>
-				            <td id="receiverAddr" class="box_sub_tit" style="font-size: 13px; color: #666;"></td>
+				            <td id="receiverAddr" class="box_sub_tit" style="font-size: 13px; color: #666;">${userDTO.receiverAddr1}  ${userDTO.receiverAddr2}</td>
 				          </tr>
 				         
 			          	</tbody>
@@ -151,8 +152,7 @@
 			        	<tr>
 				            <td class="box_sub_tit" style="width:150px; height:38px; font-size: 13px; color: #666; padding-top: 5px;">총 주문 금액 : </td>
 				            <td>
-				            <span id="totalAmount" class="box_sub_tit" style="font-size: 13px; color: #666;"></span>
-				            <span style="font-size: 13px; color: #666;">원</span>
+				            	<span id="totalPayment1" style="font-size: 13px; color: #666;"><f:formatNumber pattern="###,###,###" value="${total}"/>원</span>
 				            </td>
 				          </tr>
 						<tr>
@@ -165,19 +165,9 @@
 				        </tr>
 						
 						<tr>
-				            <td class="box_sub_tit" style="width:150px; height:38px; font-size: 13px; color: #666; padding-top: 5px;">사용한 포인트 : </td>
-				            <td>
-							<span id="usePoint" class="box_sub_tit" style="font-size: 13px; color: #666;">${usePoint}</span>
-				            <span style="font-size: 13px; color: #666;">원</span>
-				            <input type="hidden" id="totalPoint">
-							</td>
-				       </tr>
-						<tr>
 				            <td class="box_sub_tit" style="width:150px; height:38px; font-size: 13px; color: #666; padding-top: 5px;">결제금액 : </td>
 				            <td>
-				            <span id="totalPayment1" class="box_sub_tit" style="font-size: 13px; color: #666;"></span>
-				            <span style="font-size: 13px; color: #666;">원</span>
-				            <input type="hidden" id="x_totalPayment">
+				            <span id="totalAmount" style="font-size: 13px; color: #666;"><f:formatNumber pattern="###,###,###" value=""/>원</span>
 				            </td>
 				       </tr>		        
 		        	</tbody>
@@ -219,18 +209,6 @@
 			</tbody>		
 		</table>
 		
-		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_style_01" 
-		style="margin-bottom:20px; background-color: #fff; padding: 30px 30px 30px 40px; border: 1px solid #ddd;">
-		    <tbody>
-			    <tr class="box_tit" style="align:center;">
-				    <td>
-					    <input type="radio" name="payAgree" value="yes">
-						<label style="font-size:13px; font-weight:700;  color:#333;"><b>주문할 상품의 구매조건을 확인하였으며, 결제진행에 동의합니다.</b></label>
-					</td>
-			     
-			    </tr>
-		    </tbody>
-		</table>
 		
 		<!-- 취소 / 다음 -->
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -256,19 +234,13 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 $(function(){
-var totalP = 0;	
+var totalP = "${total}";	
 var prdArray = new Array();
 var prdQtyArray = new Array();
-var prdOption = new Array();
 
 	
-	$('#totalPurchase').text(totalP);
 	//총주문금액
 	$('#totalAmount').text(AddComma(totalP));
-	
-	//포인트
-	var point =	$('#usePoint').text(); //사용한포인트
-	
 	
 	//배송비 및 총 결제 금액
 	var totalPayment = 0;
@@ -276,8 +248,8 @@ var prdOption = new Array();
 		$('#del1').text("+ ")
 		$('#del2').text(" 원(조건부 무료)")
 		$('#deliveryFee').text("0");
-		totalPayment = totalP - point;
-		$('#totalPayment1').text(AddComma(totalPayment));
+		totalPayment = stringNumberToInt(totalP);
+		$('#totalAmount').text(AddComma(totalPayment));
 		$('#totalPayment2').text(AddComma(totalPayment));
 		
 	}
@@ -285,8 +257,8 @@ var prdOption = new Array();
 		$('#del1').text("")
 		$('#del2').text("")
 		$('#deliveryFee').text(AddComma(2500));
-		totalPayment = totalP - point + 2500;
-		$('#totalPayment1').text(AddComma(totalPayment));
+		totalPayment = stringNumberToInt(totalP)+ 2500;
+		$('#totalAmount').text(AddComma(totalPayment));
 		$('#totalPayment2').text(AddComma(totalPayment));
 	}
 		
@@ -300,14 +272,6 @@ var prdOption = new Array();
 
 
 	$('#payBtn').click(function(){
-		var payAgreeVal = $('input[name="payAgree"]:checked').val();
-		
-		if(payAgreeVal!='yes'){
-			alert("구매 내용에 동의하셔야 결제가 가능합니다.");
-		}
-		
-		else{
-			
 			var paymentType = $('#paymentType').text();
 			var pt = 0;
 			if(paymentType == "카드결제"){
@@ -319,10 +283,12 @@ var prdOption = new Array();
 						
 			//orderlist생성
 			var totalProductPayment = stringNumberToInt($('#totalAmount').text());	//총주문금액
-			var totalPayment = stringNumberToInt($('#totalPayment1').text());		//총결제금액
+			var totalPayment = stringNumberToInt($('#totalPayment2').text());		//총결제금액
 			var deliveryFee = stringNumberToInt($('#deliveryFee').text());
+			alert("totalProductPayment="+totalProductPayment+",totalPayment="+totalPayment+",deliveryFee="+deliveryFee);
+			
 			//회원
-			if('${memId}' == ''){
+			if('${memId}' != ''){
 				$.ajax({
 					type : 'POST',
 					url  : '/miniproject/order/insertOrderlist',
@@ -331,24 +297,23 @@ var prdOption = new Array();
 							 'totalProductPayment' 	: totalProductPayment,
 							 'paymentType' 			: pt, 
 							 'deliveryFee' 			: deliveryFee,
-							 'totalPayment' 		: totalPayment,
-							 'x_totalPayment'		: $('#x_totalPayment').val(),
-							 'members'				: 1 },
+							 'totalPayment' 		: totalPayment},
 					dataType: 'text',
 					success: function(data){
 						if(data == "success"){
-							alert("상품 구매가 완료되었습니다.")
+							//alert("상품 구매가 완료되었습니다.")
 						}
 						
 					}
 					
 				});//ajax orderlist생성/order수정			
 			}//if 회원
-			
-			//회원이 아니면 팅기도록
-			alert("회원만 진행가능합니다"); 			
-			location.replace("/miniproject");
-			return false;
+			else{
+				//회원이 아니면 팅기도록
+				alert("회원만 진행가능합니다"); 			
+				location.replace("/miniproject/order/orderCancel");
+				return false;
+			}
 			
 			//선택주문상품 장바구니에서 삭제
 			var checkedValueStr = '${checkedValueStr}';
@@ -359,7 +324,8 @@ var prdOption = new Array();
 				$.ajax({
 					type: 'POST',
 					url: '/miniproject/cart/deleteCartAfterPay',
-					data: {'cartCode': cartCodeArray[i]}
+					data: {'cartCode': cartCodeArray[i]},
+					async: false,
 				});
 			}
 			
@@ -375,7 +341,7 @@ var prdOption = new Array();
 					dataType : 'text',
 					success : function(data){
 						if(data == "success"){
-							alert("상품 재고 수정완료");
+							//alert("상품 재고 수정완료");
 						}
 						else{
 							//alert("상품 재고 수정실패 ");
@@ -383,8 +349,9 @@ var prdOption = new Array();
 					}
 				}); 
 			}//for
+			alert("상품구매가 완료되었습니다! 좋은 하루 되세요");
 			location.href="/miniproject";
-		}//else		
+		
 	});//결제버튼
 });
 

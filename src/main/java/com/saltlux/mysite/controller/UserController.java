@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saltlux.mysite.dto.UserDTO;
-import com.saltlux.mysite.dto.UserVo;
 import com.saltlux.mysite.security.Auth;
 import com.saltlux.mysite.security.AuthUser;
 import com.saltlux.mysite.service.UserService;

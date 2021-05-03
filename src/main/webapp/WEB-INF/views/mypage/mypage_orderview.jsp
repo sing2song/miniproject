@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="../css/mypage.css">
-</head>
-<body>
+
  <!-- mypage right contents -->
   <div class="content">
     <div class="content_top">
@@ -18,21 +11,16 @@
       <table class="mypage_table">
         <tr id="mypage_table_top">
           <th id="product_info">상품정보</th>
-          <th id="product_subject"></th>
+          <th id="product_subject">상품명</th>
           <th id="product_price">판매가</th>
           <th id="qty">수량</th>
           <th id="delivery">주문상태</th>
-          <th id="exchangeRefund">교환/환불</th>
         </tr>
         <c:forEach var="orderDTO" items="${list}">
 	        <tr class="mypage_table_content orderview_content">
-	          <td id="product_thumb"><img id="thumbimg" src="../image/thumb/${orderDTO.thumbImg }"></td>
+	          <td id="product_thumb"><img id="thumbimg" src="${pageContext.request.contextPath }/assets/image/thumb/${orderDTO.thumbImg }"></td>
 	          <td>
-	          <span id="product_name">${orderDTO.productName }</span>
-	          <c:if test="${orderDTO.optionContent!=null }">
-	          <br>
-	          <span id="option_name">${orderDTO.optionContent }</span>
-	          </c:if>
+		          <span id="product_name">${orderDTO.productName }</span>		          
 	          </td>
 	          <td>${orderDTO.totalPrice }원</td>
 	          <td>${orderDTO.purchaseQty }개</td>
@@ -58,44 +46,9 @@
 	          			주문완료
 	          		</c:if>
 	          		
-	          	</span>
-          		<c:if test="${orderDTO.orderState==1 }">
-          			<br>
-          			<!-- <input type="button" id="order_cancle" class="orderStateBtn" value="주문취소"> -->
-          		</c:if>
-          		<c:if test="${orderDTO.orderState==2 }">
-          			<br>
-          			<!-- <input type="button" id="order_cancle" class="orderStateBtn" value="주문취소"> -->
-          		</c:if>
-          		<c:if test="${orderDTO.orderState==4 }">
-          			<!-- <br>
-          			<input type="button" id="order_exchange" class="orderStateBtn" value="교환신청">
-          			<br>
-          			<input type="button" id="order_refund" class="orderStateBtn" value="환불신청">
-          			<br>
-          			<input type="button" id="order_receiptOk" class="orderStateBtn" value="수령확인"> -->
-          		</c:if>
+	          	</span>          		
 	          </td>
-	          <td>
-	          	<span class="color_2ac1bc">
-	          		<c:if test="${orderDTO.exchange==1 }">
-	          			교환접수<br>
-	          			[${orderDTO.exchangeQty}개]
-	          		</c:if>
-	          		<c:if test="${orderDTO.exchange==2 }">
-	          			교환완료<br>
-	          			[${orderDTO.exchangeQty}개]
-	          		</c:if>
-	          		<c:if test="${orderDTO.refund==1 }">
-	          			환불접수<br>
-	          			[${orderDTO.refundQty}개]
-		          	</c:if>
-		          	<c:if test="${orderDTO.refund==2 }">
-	          			환불완료<br>
-	          			[${orderDTO.refundQty}개]
-		          	</c:if>
-	          	</span>
-	          </td>
+	          
 	        </tr>
         </c:forEach>
       </table>
@@ -113,7 +66,7 @@
         </tr>
         <tr>
           <td>주문자 핸드폰 :</td>
-          <td>${userDTO.userPhone1 }-${userDTO.userPhone2 }-${userDTO.userPhone3 }</td>
+          <td>${userDTO.userPhone }</td>
         </tr>
         <tr>
           <td>이메일 :</td>
@@ -130,7 +83,7 @@
         </tr>
         <tr>
           <td>핸드폰 :</td>
-          <td>${userDTO.receiverPhone1}-${userDTO.receiverPhone2}-${userDTO.receiverPhone3}</td>
+          <td>${userDTO.receiverPhone}</td>
         </tr>
         <tr>
           <td>우편번호 :</td>
@@ -180,10 +133,10 @@
           <td>
 	          <span class="color_2ac1bc">
 	          <c:if test="${sum>=30000 }">
-	          	<c:out value="${sum-usePoint}"/>원
+	          	<c:out value="${sum}"/>원
 	          </c:if>
 	          <c:if test="${sum<30000 }">
-	          	<c:out value="${sum+2500-usePoint}"/>원
+	          	<c:out value="${sum+2500}"/>원
 	          </c:if>
 	          </span>
           </td>
@@ -212,18 +165,9 @@
       </table>
     </div>
 
-    <!-- <div id="order_info">
-      [ 주문취소·교환·반품을 원하시면 마이페이지의 <a id="mantoman">1:1문의게시판</a>을 이용하세요. ]
-    </div> -->
-
     <div>
       <li class="white_btn back_btn" onclick="javascript:history.go(-1)">뒤로</li>
     </div>
   </div>
 
-</body>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-
-</script>
-</html>

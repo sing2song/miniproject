@@ -295,7 +295,7 @@
 			        <td align="center" height="100">
 			          <div style="width:100%" class="noline">
 			            <div style="width: 180px; display: inline-block;">
-			            	<div onclick="location.href='${pageContext.request.contextPath }/cart/goods_cart'" class="sub-button-s" 
+			            	<div onclick="location.href='${pageContext.request.contextPath }/order/orderCancle'" class="sub-button-s" 
 							style="text-align:center; height:60px; width:150px; line-height:55px; font-size: 14px; font-weight:700;">취소</div>			            
 			            </div>
 			            <div style="width: 180px; display: inline-block; padding-left: 5px;">
@@ -399,7 +399,30 @@ $('#orderWriteBtn').click(function(){
 		return false;
 	}
 	//user정보 및 배송정보
-
+	
+	$.ajax({
+		type : 'POST',
+		url : '/miniproject/order/updateUserInfo',
+		async: false,
+		data : {'userId'			: '${memId}',
+				'userName'			: '${memName}',
+				'userPhone'			: $('#userPhone').val(),
+				'userEmail'			: $('#userEmail').val(),
+				'receiverName' 		: $('#receiverName').val(),
+				'receiverAddr1' 	: $('#receiverAddr1').val(),
+				'receiverAddr2' 	: $('#receiverAddr2').val(),
+				'receiverZipcode' 	: $('#receiverZipcode').val(),
+				'receiverPhone' 	: $('#receiverPhone').val()
+		},
+		success : function(data){
+			if(data == "success"){
+				//alert("고객배송정보보내기 성공");
+			}
+			else {
+				//alert("실패!!");
+			}
+		}
+	});
 	
 	var thumbImg = '${thumbImgList}';
  	var thumbImgArray = thumbImg.split(",");

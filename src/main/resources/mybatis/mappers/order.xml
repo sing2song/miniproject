@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="orderSQL">
 	<!--주문정보 추가 -->
 	<insert id="setOrderInfo" parameterType="order">
-		insert into TBL_ORDER(orderCode
-							  ,orderDate
+		insert into TBL_ORDER(orderCode,
+							   orderDate
 							  ,userId
 							  ,userName
 							  ,thumbImg
@@ -32,11 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 	
 	<!--개인 주문정보 가져오기 -->
-	<select id="getOrderInfo" parameterType="String" resultType="order">
-		select * from TBL_ORDER where userId = #{userId} and orderstate = 1
+	<select id="getOrderListInfo" parameterType="String" resultType="orderlist">
+		select * from TBL_ORDERLIST where userId = #{userId}
 	</select>
 	
-	<!-- 재고처리 옵션없음 -->
+	<!-- 재고처리 -->
 	<update id="reduceSaleProduct" parameterType="java.util.Map">
 		update TBL_PRODUCT set stockQty = stockQty - #{purchaseQty}
 							, saleQty = saleQty + #{purchaseQty}
@@ -45,7 +45,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!--주문정보 가져오기 -->
-	<select id="getOrderProduct" resultType="order">
-		select * from TBL_ORDER order by ordercode desc 
+	<select id="getOrderProduct" parameterType="String" resultType="order">
+		select * from TBL_ORDER where userId=#{userId} and orderState = 1 order by ordercode desc 
 	</select>
+	
+	<!-- 결제시 주문상태 변경 -->
+	<update id="OrderReady" parameterType="java.util.Map">
+		update TBL_ORDER set orderCode=#{orderCode},orderState = 2 where userId = #{userId} and orderCode=0;
+	</update>
+	
+	<!-- 결제취소시 order에 들어온 주문 삭제 -->
+	<delete id="orderCancel" parameterType="String">
+		delete TBL_ORDER where userId = #{userId}
+	</delete>
+	
+	<!-- orderlist 생성 및 order 수정 -->
+	<insert id="insertOrderlist" parameterType="java.util.Map">
+
+			insert into TBL_ORDERLIST(orderDate
+									,userId 
+									,userName 
+									,totalProductPayment
+									,paymentType 
+									,deliveryFee
+									,totalPayment ) values(
+									now()
+									,#{userId}
+									,#{userName}
+									,#{totalProductPayment}
+									,#{paymentType}
+									,#{deliveryFee}
+									,#{totalPayment} );
+									
+	</insert>
+	
+	<!--모든 주문정보 가져오기 -->
+	<select id="getOrderListAllInfo" resultType="orderlist">
+		select * from TBL_ORDERLIST order by orderCode desc
+	</select>
+	
+	<!--orderlist 최상 orderCode 가져오기 -->
+	<select id="getOrderListCode" resultType="Integer">
+		select orderCode from TBL_ORDERLIST order by orderCode desc limit 1
+	</select>
+	
+	<!--마이페이지 주문view 안에 목록리스트 가져오기 -->
+	<select id="getOrder" parameterType="String" resultType="order">
+		select * from TBL_ORDER where orderCode=#{orderCode} 
+	</select>
+	
 </mapper>
