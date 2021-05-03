@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <div class="indiv2" style="width:1000px; margin-top:135px;" ><!-- Start indiv -->
 	<div class="in_tit" style="font-size: 22px; font-weight: 700; text-align: left;color:#222;">
@@ -16,8 +18,26 @@
 				<th style="border-top: 1px solid #999; font-size: 12px; color: #999; text-align: right; padding-right:20px; font-weight:500;">합계</th>
 			</tr>
 		</thead>
-		<tbody id="tbody">		
-					
+		<tbody id="tbody">	
+		<c:set var="total" value="0" />
+		<c:forEach var="orderDTO" items="${list }" varStatus="status">	
+			<tr>
+				<td style="vertical-align:top; padding: 30px 0;">
+					<a href="#" style="margin-bottom:0;">
+					<img src="${pageContext.request.contextPath }/assets/image/thumb/${orderDTO.thumbImg }" style="width: 70px;"></a>
+				</td>
+				<td class="order_option" style="text-align:left;vertical-align:top; ">
+					<div style="color: #222; height:auto; font-weight: 700; font-size: 14px; padding: 30px 0; margin:20px 0 20px 0;">${orderDTO.productName }</div>
+				</td>
+				<td style="color: #222; vertical-align:middle; padding: 30px 50px 30px 0; text-align:right;">${orderDTO.tdiscountPrice }<span>원</span></td>
+				<td style="vertical-align: middle; padding: 22px 0 30px 0;">
+					<div style="padding-top: 8px; vertical-align: middle; color:#222;">${orderDTO.purchaseQty }<span>개</span></div>
+				</td>
+				<td class="totalPrice" tyle="vertical-align: middle; color:#333; text-align:right; padding: 30px 20px 0 0; font-weight:700; ">
+				<f:formatNumber pattern="###,###,###" value="${cartDTO.discountPrice * cartDTO.productQty }" /><span>원</span></td>
+				<c:set var="total" value="${total + cartDTO.discountPrice * cartDTO.productQty }" />
+			</tr>
+			</c:forEach>		
 		</tbody>
 		
 		<tfoot id="tfooter">
@@ -28,8 +48,9 @@
 							<tr class="total_price" style="padding-right: 0px;">
 								<td>
 									<font style="color:#333;font-weight:500;">상품합계금액 (배송비 별도)</font>&nbsp;&nbsp;&nbsp;&nbsp;
-									<font id="totalPurchase" style="font-family:'Montserrat', sans-serif; font-size:24px; color:#2ac1bc; font-weight:700;"></font>
-									<font style="font-size:15px;color:#2ac1bc;font-weight:700;">원</font>									
+									<font id="totalPrice" style="font-family:'Montserrat', sans-serif; font-size:24px; color:#FFA7A7; font-weight:700;">
+										<f:formatNumber pattern="###,###,###" value="${total}"/>원
+									</font>								
 								</td>
 							</tr>
 						</tbody>
@@ -57,18 +78,18 @@
 						<tbody>
 						    <tr>
 						      <td class="box_sub_tit" style="width:150px; height:38px; font-size: 13px; color: #666; padding-top: 5px;">주문자 이름:</td>
-						      <td id="userName" class="box_sub_tit" style=" font-size: 13px; color: #666; padding-top: 5px; "></td>
+						      <td id="userName" class="box_sub_tit" style=" font-size: 13px; color: #666; padding-top: 5px; ">${userDTO.userName }</td>
 						    </tr>
 				   
 							<tr>
 								<td class="box_sub_tit" style="font-size: 13px; color: #666;">주문자 핸드폰 :</td>
-								<td id="userPhone" class="box_sub_tit" style="font-size: 13px;color: #666; padding-top: 5px; "></td>
+								<td id="userPhone" class="box_sub_tit" style="font-size: 13px;color: #666; padding-top: 5px; ">${userDTO.userPhone }</td>
 							</tr>
 							
 							
 							<tr>
 					            <td class="box_sub_tit" style="font-size: 13px; color: #666;">이메일 :</td>
-					            <td id="userEmail" class="box_sub_tit" style=" font-size: 13px; color: #666;" ></td>
+					            <td id="userEmail" class="box_sub_tit" style=" font-size: 13px; color: #666;" >${userDTO.userEmail }</td>
 				          	</tr>
 			           </tbody>
 			        </table>

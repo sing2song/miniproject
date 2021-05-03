@@ -116,15 +116,11 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		//주문정보
 		List<OrderDTO> list = orderService.getOrderInfo(userId);		
-		//제품정보가져오기
-		//GoodsDTO goodsDTO = goodsService.getGoodsView(productCode);	
 		//유저정보
 		UserDTO userDTO = userService.checkId(userId);
 		
-		//mav.addObject("productQty", productQty);
 		mav.addObject("list", list); 
 		mav.addObject("userDTO", userDTO);		
-		//mav.addObject("goodsDTO", goodsDTO);	
 		mav.addObject("checkedValueStr", checkedValueStr); //cartCode
 		System.out.println(" check : "+checkedValueStr+",userDTO : "+userDTO+",list : "+list);
 		
