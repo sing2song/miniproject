@@ -119,6 +119,9 @@ $('#registBtn').click(function(){
 	}
 });
 
+$('#registResetBtn').click(function(){
+	location.href="/miniproject/admin/productList";
+});
 </script>
 
 </html>

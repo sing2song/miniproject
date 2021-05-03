@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.saltlux.mysite.dto.UserDTO;
-import com.saltlux.mysite.exception.UserRepositoryException;
 
 @Repository
 public class UserRepository {

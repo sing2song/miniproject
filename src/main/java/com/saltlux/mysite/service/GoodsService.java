@@ -34,6 +34,10 @@ public class GoodsService {
 		goodsRepository.productModify(goodsDTO);
 	}
 
+	public void productDelete(String productCode) {
+		goodsRepository.productDelete(productCode);
+	}
+
 	
 
 }

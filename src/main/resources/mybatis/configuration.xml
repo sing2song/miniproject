@@ -2,11 +2,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.saltlux.mysite.dto.UserVo" alias="uservo"/>
-		<typeAlias type="com.saltlux.mysite.dto.Guestbook02Vo" alias="guestbookvo"/>
 		<typeAlias type="com.saltlux.mysite.dto.GoodsDTO" alias="goods"/>
 		<typeAlias type="com.saltlux.mysite.dto.UserDTO" alias="user"/>
-		<typeAlias type="com.saltlux.mysite.dto.QnaboardDTO" alias="qnaboard"/>
 		<typeAlias type="com.saltlux.mysite.dto.CartDTO" alias="cart"/>
 		<typeAlias type="com.saltlux.mysite.dto.OrderDTO" alias="order"/>
 		<typeAlias type="com.saltlux.mysite.dto.OrderlistDTO" alias="orderlist"/>
@@ -14,9 +11,7 @@
     </typeAliases>	
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml" />
-		<mapper resource="mybatis/mappers/guestbook.xml" />
 		<mapper resource="mybatis/mappers/goods.xml" />
-		<mapper resource="mybatis/mappers/qnaboard.xml" />
 		<mapper resource="mybatis/mappers/cart.xml" />
 		<mapper resource="mybatis/mappers/order.xml" />
 		<mapper resource="mybatis/mappers/admin.xml" />

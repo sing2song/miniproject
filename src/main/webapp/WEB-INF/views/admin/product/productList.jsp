@@ -3,10 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- 메인컨텐츠 시작 -->
-<input type="hidden" id="deleteCheck" value="${deleteCheck }">
-<input type="hidden" class="deleteCheck" value="0">
-<input type="hidden" id="pg" value="${pg }">
-<input type="hidden" name="pg" value="1">
+
 <div id="mainContent_wrap">
 	<div id="product_search_wrap" style="width:1200px; margin: 0 auto;">
 		<div id="product_search_title" style="margin-bottom: 20px;">
@@ -19,7 +16,7 @@
          	<input type="button" id="productDeleteBtn" value="선 택 삭 제">
        	</div>
 	    <form id="checkDeleteForm" method="post" 
-	    action="productDelete">   			
+	    action="${pageContext.request.contextPath }/admin/productDelete">   			
 		<div id="productSeach_list" align="left" style="margin-top: 50px;">
 			<table id="productSearch_Table" border="1" style="width: 100%; border: 1px solid #d9dadc; border-spacing: 0; line-height: 1.5;">
 				<tr>
@@ -54,55 +51,11 @@
 				
 			</table>
 			<br>
-			<div id="productPagingDiv"></div>
-			<br><br><br><br>
-						
 			
 		</div>
 		</form>      
 		
-		 <!-- 선택 삭제 시 확인&취소 / Modal -->
-	    <div id="open_confirmModal" class="modal">
-
-			<!-- Modal content -->
-			<div class="modal-content">
-          		<p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">상품삭제</span></b></span></p>
-				<p style="text-align: center; line-height: 1.5;"><br>	<span style="color: red;">정말  삭제 하시겠습니까?</span></p>
-   				<p><br /></p>
-
-				<div class="modalDiv" id="confirmOK_Modal" style="display: inline-block;">
-					<span class="pop_bt" style="font-size: 13pt; " >
-       					  확인
-    				</span>
-				</div>
-				
-				<div  class="modalDiv" id="confirmClose_Modal" style="float:right;">
-					<span class="pop_bt" style="font-size: 13pt;" >
-               			 취소
-            		</span>
-        		</div>
-			</div>
-
-		</div>
-  		<!--End Modal-->
-        	
-        	
-		<!-- 체크박스 선택 X / Modal -->
-		<div id="open_nonCheckModal" class="modal">
-
-			<!-- Modal content -->
-			<div class="modal-content">	
-				<p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">상품삭제</span></b></span></p>
-                <p style="text-align: center; line-height: 1.5; color: red;"><br />항목을 선택해 주세요</p>
-                <p><br /></p>
-            	<div class="close_Modal" style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;">
-               		<span class="pop_bt" style="font-size: 13pt;" >
-                   	 	 닫기
-                	</span>
-            	</div>
-     		</div>
-		</div>
-    	 <!--End Modal-->
+		 
 
 	</div><!-- search_wrap -->
 	
@@ -118,26 +71,13 @@
   return num.toString().replace(regexp, ',');
 }
 
-/* 모달 창 닫기 */
-$('#confirmClose_Modal').click(function(){
-	$('#open_confirmModal').hide();
-});
-
-$('.close_Modal').click(function(){
-	$('#open_nonCheckModal').hide();
-	$('#open_deleteSuccessModal').hide();
-});
-
 /* 상품 선택 삭제 */
 $('#productDeleteBtn').click(function(){
 	var count = $('.check:checked').length;
-	if(count==0){
-		$('#open_nonCheckModal').show();
-	}else{
-		$('#open_confirmModal').show();
-		$("#confirmOK_Modal").off().on('click', function(){
+	if(count!=0){
+		if(confirm("정말 삭제하시겠습니까?")){
 			$('#checkDeleteForm').submit();
-		});
+		}
 	}
 
 });

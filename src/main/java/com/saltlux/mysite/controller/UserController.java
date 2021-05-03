@@ -50,32 +50,6 @@ public class UserController {
 		mav.setViewName("/main/nosIndex");
 		return mav;
 	}
-
-	/*
-	@Auth
-	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(@AuthUser UserVo authUser, Model model) {
-		Long no = authUser.getNo();
-		
-		UserVo userVo = userService.getUser(no);
-		System.out.println("수정정보 : "+userVo);
-		model.addAttribute("userVo", userVo);
-		
-		return "user/update";
-	}
-
-	@Auth
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(@AuthUser UserVo authUser, UserVo vo) {		
-		Long no = authUser.getNo();
-		vo.setNo(no);
-		userService.update(vo);
-		System.out.println(vo);
-		
-		return "redirect:/user/update";
-	}
-	*/
-	
 	
 	//회원가입시 중복아이디체크
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)

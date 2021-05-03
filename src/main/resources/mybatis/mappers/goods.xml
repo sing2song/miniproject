@@ -62,8 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>	
 		
 	<!-- 상품삭제 -->
-	<delete id="productDelete" parameterType="java.util.Map">
-		delete TBL_PRODUCT where productCode in 
-		<foreach close=")" open="(" separator="," index="i" collection="array">${array[i]} </foreach>
+	<delete id="productDelete" parameterType="String">
+		delete from TBL_PRODUCT where productCode =#{productCode}
 	</delete>
 </mapper>

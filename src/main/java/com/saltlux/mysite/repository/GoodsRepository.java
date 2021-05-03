@@ -41,4 +41,8 @@ public class GoodsRepository {
 		sqlSession.update("goodsSQL.productModify",goodsDTO);
 	}
 
+	public void productDelete(String productCode) {
+		sqlSession.delete("goodsSQL.productDelete",productCode);
+	}
+
 }

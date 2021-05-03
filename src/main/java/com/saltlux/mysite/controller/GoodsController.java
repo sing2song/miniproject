@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saltlux.mysite.dto.GoodsDTO;
-import com.saltlux.mysite.dto.QnaboardDTO;
 import com.saltlux.mysite.service.GoodsService;
-import com.saltlux.mysite.service.QnaboardService;
 
 
 @Controller
@@ -28,8 +26,6 @@ public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
 	
-	@Autowired
-	private QnaboardService qnaService;
 	
 	
 	//상품상세 페이지

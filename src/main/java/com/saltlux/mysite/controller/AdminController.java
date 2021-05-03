@@ -151,10 +151,7 @@ public class AdminController {
 	@RequestMapping(value="/productModify", method=RequestMethod.POST)
 	public String productModify(@ModelAttribute GoodsDTO goodsDTO
 			, @RequestParam MultipartFile thumbFile) {
-		//System.out.println(goodsDTO);
-		//System.out.println("상품수정프로세스 실행");		
 		
-		//이미지파일이 삽입여부
 		int seq = goodsDTO.getProductCode();
 		
 		if(thumbFile.isEmpty()==false) {//썸네일 있을때 이미지 수정
@@ -177,40 +174,16 @@ public class AdminController {
 		//상품 수정 DB
 		goodsService.productModify(goodsDTO);
 		
-		return "/admin/productList";
+		return "redirect:/admin/productList";
 	}
 	
 	@RequestMapping(value="/productDelete",method= RequestMethod.POST)
 	public String productDelete(@RequestParam String[] check, Model model) {
-		System.out.println("삭제내용="+check);
-		//goodsService.updateTotalProductOnSale(qtyMap);
-		//goodsService.productDelete(map);
-		//goodsService.productOptionDelete(map);
+		for(String productCode : check)
+			goodsService.productDelete(productCode);
+		
 		return "redirect:/admin/productList";
 	}
-	
-	/*
-	//재고파악
-	@RequestMapping(value="/admin/checkStock",method=RequestMethod.POST)
-	public ModelAndView checkStock(@RequestParam Map<String,String> map) {
-		
-		int stock = productManagerDAO.checkStock(map);
-		String result="";
-		
-		if(stock >= Integer.parseInt(map.get("input")))
-			result="ok";
-		else if(stock < Integer.parseInt(map.get("input")))
-			result="fail";
-		
-		System.out.println("재고는 "+stock+" 입력한 수량은 "+map.get("input")+" result="+result);
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("result", result);
-		mav.addObject("stock", stock);
-		mav.setViewName("jsonView");
-		return mav;
-	}
-		
-	*/	
+
 	
 }

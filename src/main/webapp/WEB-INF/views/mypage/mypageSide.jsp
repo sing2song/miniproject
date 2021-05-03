@@ -13,13 +13,7 @@
         <tr>
           <td class="mem_menu" colspan="2"><span class="mem_name">${memName}</span> 님</td>
         </tr>
-        <tr>
-          <td class="mem_menu">총구매액</td>
-          <td class="mem_val_td">
-	          <span class="mam_val" id="totalPayment">${userDTO.totalPayment}</span> 원
-	          <input type="hidden" id="x_totalPayment">
-          </td>
-        </tr>
+        
         
         <tr>
           <td class="mem_menu"><a href="${pageContext.request.contextPath }/cart/goods_cart">장바구니</a></td>
