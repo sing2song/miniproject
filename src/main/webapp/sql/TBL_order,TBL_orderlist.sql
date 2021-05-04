@@ -21,14 +21,7 @@ create table TBL_ORDER(
 			,paymentType int 		-- 0:신용카드 / 1:핸드폰
 			,totalPayment int 		-- 총결제금액 : 해당주문번호에 대한 총 결제금액
 			,orderState int 	default 1		-- 0: 주문취소 1: 주문접수 2: 배송준비 3: 배송중 4: 배송완료 5:교환접수 6:교환완료 7:환불접수 8: 환불완료
-			,cancel int default 0		-- 취소여부
-			,cancelQty int
-			,cancelAmount int
-			,exchange int default 0		-- 교환여부
-			,exchangeQty int
-			,refund int default 0		-- 환불여부
-			,refundQty int
-			,refundAmount int		-- 환불금액
+		
 			);	
 
 
@@ -48,10 +41,10 @@ create table TBL_ORDERLIST(
 			,paymentType int 		-- 결제방법 (1 : 신용카드 / 2 : 핸드폰)
 			,deliveryFee int
 			,totalPayment int 		-- 총결제금액 ( = 상품합계금액 + 배송비) 해당주문번호에 대한 총 결제금액
-			,crPayment int 			-- 취소/환불금액(cancel /refund) 둘다 있다면,합산금액으로
 			,orderState int 			-- 주문상태
 			);
             
 
  select * from TBL_ORDER;
  select * from TBL_ORDERLIST;
+ 

@@ -62,7 +62,7 @@
 								</div>
 								<div>
 									<img id="down"
-										src="${pageContext.request.contextPath }/assets/image/minus.png"
+										src="${pageContext.request.contextPath }/assets/image/minus-button.png"
 										style="cursor: pointer; width: 14px; margin: 3px 2px;">
 								</div>
 							</div>
